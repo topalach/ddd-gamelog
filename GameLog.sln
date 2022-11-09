@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Domain", "GameLog.Domain\GameLog.Domain.csproj", "{F9B0E387-4384-4CAB-8490-C70EF33F321F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Tests.Domain", "GameLog.Tests.Domain\GameLog.Tests.Domain.csproj", "{DD5AE744-EA84-4AAD-9B76-3AA681988796}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2B45C342-F514-4678-8DC0-30C710E25681}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD5AE744-EA84-4AAD-9B76-3AA681988796} = {2B45C342-F514-4678-8DC0-30C710E25681}
+	EndGlobalSection
+EndGlobal

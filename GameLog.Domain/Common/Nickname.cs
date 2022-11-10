@@ -1,4 +1,5 @@
-﻿using GameLog.Domain.Exceptions;
+﻿using GameLog.Common.Validation;
+using GameLog.Domain.Common.Exceptions;
 
 namespace GameLog.Domain.Common;
 

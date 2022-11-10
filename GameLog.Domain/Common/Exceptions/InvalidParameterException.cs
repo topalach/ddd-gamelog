@@ -1,4 +1,4 @@
-﻿namespace GameLog.Domain.Exceptions;
+﻿namespace GameLog.Domain.Common.Exceptions;
 
 public class InvalidParameterException : DomainValidationException
 {

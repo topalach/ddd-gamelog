@@ -1,28 +1,32 @@
 ﻿using GameLog.Domain.Common;
-using GameLog.Domain.Exceptions;
 
 namespace GameLog.Domain.Actors;
 
 public class Gamer
 {
     public GamerId Id { get; }
+    public Email Email { get; }
     public Nickname Nickname { get; }
-    public Name FirstName { get; }
-    public Name LastName { get; }
-    public CreatedAt CreatedAt { get; }
+    public FullName? FullName { get; private set; }
+    public NonEmptyDateTime CreatedAt { get; }
     
-    //TODO: add constructor
+    public Gamer(GamerId id, Email email, Nickname nickname, NonEmptyDateTime createdAt)
+    {
+        Id = id;
+        Email = email;
+        Nickname = nickname;
+        CreatedAt = createdAt;
+    }
+
+    public void UpdateFullName(FullName? fullName)
+    {
+        FullName = fullName;
+    }
 }
 
-public record GamerId
+public record GamerId : Id
 {
-    public string Id { get; }
-    
-    public GamerId(string id)
+    public GamerId(string id) : base(id)
     {
-        if (string.IsNullOrEmpty(id))
-            throw new InvalidParameterException("Gamer ID cannot be null nor empty", nameof(id));
-        
-        Id = id;
     }
 }

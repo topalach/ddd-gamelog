@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Domain", "GameLog.Domain\GameLog.Domain.csproj", "{F9B0E387-4384-4CAB-8490-C70EF33F321F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Tests.Domain", "GameLog.Tests.Domain\GameLog.Tests.Domain.csproj", "{DD5AE744-EA84-4AAD-9B76-3AA681988796}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2B45C342-F514-4678-8DC0-30C710E25681}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Common", "GameLog.Common\GameLog.Common.csproj", "{B1958F14-0F3D-4C4C-8F97-90BD8CEE05AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Messages", "GameLog.Messages\GameLog.Messages.csproj", "{69FDBA6E-1AAC-444C-8CBF-63D2D545F992}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Tests.Domain", "GameLog.Tests.Domain\GameLog.Tests.Domain.csproj", "{B94DE3E3-ED96-41DC-8333-5573F28C1C09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,16 +26,20 @@ Global
 		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9B0E387-4384-4CAB-8490-C70EF33F321F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD5AE744-EA84-4AAD-9B76-3AA681988796}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1958F14-0F3D-4C4C-8F97-90BD8CEE05AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1958F14-0F3D-4C4C-8F97-90BD8CEE05AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1958F14-0F3D-4C4C-8F97-90BD8CEE05AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1958F14-0F3D-4C4C-8F97-90BD8CEE05AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69FDBA6E-1AAC-444C-8CBF-63D2D545F992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FDBA6E-1AAC-444C-8CBF-63D2D545F992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FDBA6E-1AAC-444C-8CBF-63D2D545F992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FDBA6E-1AAC-444C-8CBF-63D2D545F992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94DE3E3-ED96-41DC-8333-5573F28C1C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94DE3E3-ED96-41DC-8333-5573F28C1C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94DE3E3-ED96-41DC-8333-5573F28C1C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94DE3E3-ED96-41DC-8333-5573F28C1C09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DD5AE744-EA84-4AAD-9B76-3AA681988796} = {2B45C342-F514-4678-8DC0-30C710E25681}
+		{B94DE3E3-ED96-41DC-8333-5573F28C1C09} = {2B45C342-F514-4678-8DC0-30C710E25681}
 	EndGlobalSection
 EndGlobal

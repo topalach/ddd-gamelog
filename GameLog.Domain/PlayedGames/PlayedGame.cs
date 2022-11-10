@@ -14,6 +14,7 @@ public class PlayedGame
     public NonEmptyDateTime CreatedAt { get; }
     public NonEmptyDateTime? UpdatedAt { get; }
     
+    public PlayedGameStatus? Status { get; }
     public GameScore? Score { get; }
     public NumberOfHoursPlayed? HoursPlayed { get; }
 
@@ -61,4 +62,10 @@ public record NumberOfHoursPlayed
         
         Value = value;
     }
+}
+
+public enum PlayedGameStatus
+{
+    CurrentlyPlaying,
+    Played
 }

@@ -20,4 +20,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameLog.Domain\GameLog.Domain.csproj" />
+    <ProjectReference Include="..\GameLog.Messages\GameLog.Messages.csproj" />
+  </ItemGroup>
+
 </Project>

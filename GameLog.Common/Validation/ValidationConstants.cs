@@ -10,5 +10,6 @@ public static class ValidationConstants
     public static class GameProfiles
     {
         public const int NameMaxLength = 150;
+        public const int DescriptionMaxLength = 1000;
     }
 }

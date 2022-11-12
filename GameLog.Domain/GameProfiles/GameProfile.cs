@@ -4,19 +4,61 @@ using GameLog.Domain.Common.Exceptions;
 
 namespace GameLog.Domain.GameProfiles;
 
-public class GameProfile
+public class GameProfile : Aggregate<Events.GameProfileEvent>
 {
-    public GameProfileId Id { get; }
-    public GameName Name { get; }
-    public DevelopmentInfo DevelopmentInfo { get; }
-    public NonEmptyDateTime CreatedAt { get; }
+    public GameProfileId Id { get; private set; }
+    public GameName Name { get; private set; }
+    public Genre Genre { get; private set; }
+    public DevelopmentInfo DevelopmentInfo { get; private set; }
+    public GameProfileDescription Description { get; private set; }
+    public NonEmptyDateTime CreatedAt { get; private set; }
 
-    public GameProfile(GameProfileId id, GameName name, DevelopmentInfo developmentInfo, NonEmptyDateTime createdAt)
+#pragma warning disable CS8618
+    private GameProfile()
+#pragma warning restore CS8618
     {
-        Id = id;
-        Name = name;
-        DevelopmentInfo = developmentInfo;
-        CreatedAt = createdAt;
+    }
+
+    public static GameProfile Create(
+        GameProfileId id,
+        GameName name,
+        Genre genre,
+        DevelopmentInfo developmentInfo,
+        GameProfileDescription description,
+        NonEmptyDateTime createdAt)
+    {
+        var gameProfile = new GameProfile();
+
+        gameProfile.Apply(
+            new Events.GameProfileCreated
+            {
+                Id = id,
+                GameProfileName = name,
+                Genre = genre,
+                DevelopmentInfo = developmentInfo,
+                Description = description,
+                GameProfileCreatedAt = createdAt
+            });
+
+        return gameProfile;
+    }
+
+    protected override void When(Events.GameProfileEvent @event)
+    {
+        switch (@event)
+        {
+            case Events.GameProfileCreated e:
+                Id = e.Id;
+                Name = e.GameProfileName;
+                Genre = e.Genre;
+                DevelopmentInfo = e.DevelopmentInfo;
+                Description = e.Description;
+                CreatedAt = e.GameProfileCreatedAt;
+                break;
+            
+            default:
+                throw new UnrecognizedEventException(@event);
+        }
     }
 }
 
@@ -65,4 +107,41 @@ public record DevelopmentInfo
         Developer = developer;
         Publisher = publisher;
     }
+}
+
+public record Genre
+{
+    public string Value { get; }
+
+    public Genre(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new InvalidParameterException("Genre cannot be null nor empty", nameof(value));
+        
+        Value = value;
+    }
+}
+
+public record GameProfileDescription
+{
+    private const int MaxLength = ValidationConstants.GameProfiles.DescriptionMaxLength;
+    
+    public string Value { get; }
+
+    public GameProfileDescription(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new InvalidParameterException("Game profile description cannot be null nor empty", nameof(value));
+
+        if (value.Length > MaxLength)
+        {
+            throw new InvalidParameterException(
+                $"Game profile description cannot contain more than {MaxLength} characters",
+                nameof(value));
+        }
+
+        Value = value;
+    }
+
+    public static GameProfileDescription ToBeAnnounced() => new GameProfileDescription("TBA");
 }

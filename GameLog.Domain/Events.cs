@@ -1,6 +1,6 @@
 ﻿using GameLog.Common.Gamers;
 
-namespace GameLog.Messages;
+namespace GameLog.Domain;
 
 public static class Events
 {

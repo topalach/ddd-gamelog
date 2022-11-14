@@ -17,9 +17,9 @@ public class GameProfileService
 
     public async Task<string> AddGameProfile(Commands.AddGameProfile command)
     {
-        var alreadyAdded = await _repository.NameExistsAsync(command.Name);
+        var wasAlreadyAdded = await _repository.NameExistsAsync(command.Name);
 
-        if (alreadyAdded)
+        if (wasAlreadyAdded)
             throw new InvalidOperationException($"Game profile with name '{command.Name}' already exists.");
 
         var id = await _repository.GetIdAsync();

@@ -15,7 +15,7 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
     
     public PlayedGameStatus? Status { get; private set; }
     public GameScore? Score { get; private set; }
-    public NumberOfHoursPlayed? HoursPlayed { get; private set; }
+    public NumberOfHoursPlayed HoursPlayed { get; private set; }
 
     
 #pragma warning disable CS8618
@@ -43,6 +43,22 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
         return playedGame;
     }
 
+    public void UpdateHoursPlayed(NumberOfHoursPlayed hoursPlayed)
+    {
+        Apply(new Events.HoursPlayedUpdated
+        {
+            HoursPlayed = hoursPlayed
+        });
+    }
+
+    public void UpdateScore(GameScore score)
+    {
+        Apply(new Events.ScoreUpdated
+        {
+            Score = score
+        });
+    }
+
     protected override void When(Events.PlayedGameEvent @event)
     {
         switch (@event)
@@ -52,6 +68,7 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
                 OwnerGamerId = e.OwnerGamerId;
                 GameProfileId = e.GameProfileId;
                 CreatedAt = e.CreatedAt;
+                HoursPlayed = NumberOfHoursPlayed.Zero;
                 break;
             
             case Events.HoursPlayedUpdated e:
@@ -103,6 +120,8 @@ public record NumberOfHoursPlayed
         
         Value = value;
     }
+    
+    public static NumberOfHoursPlayed Zero => new(0);
 }
 
 public enum PlayedGameStatus

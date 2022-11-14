@@ -1,6 +1,7 @@
 ﻿ using System.Linq;
  using System.Threading.Tasks;
  using GameLog.Application.PlayedGames;
+ using GameLog.Domain.Gamers;
  using GameLog.Domain.PlayedGames;
 
  namespace GameLog.Tests.Utils.Repositories;
@@ -19,9 +20,20 @@
          return Task.CompletedTask;
      }
 
-     public Task<PlayedGame> LoadAsync(PlayedGameId id)
+     public Task<PlayedGame?> LoadAsync(PlayedGameId id)
      {
-         var playedGame = Items.Single(x => x.Id == id);
+         var playedGame = Items.SingleOrDefault(x => x.Id == id);
          return Task.FromResult(playedGame);
+     }
+
+     public Task<NumberOfPlayedGames> GetNumberOfPlayedGamesFor(GamerId gamerId)
+     {
+         var count = Items.Count(x => x.OwnerGamerId == gamerId);
+         return Task.FromResult(new NumberOfPlayedGames(count));
+     }
+
+     public Task SaveChangesAsync()
+     {
+         return Task.CompletedTask;
      }
  }

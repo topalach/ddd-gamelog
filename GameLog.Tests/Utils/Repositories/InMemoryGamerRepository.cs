@@ -8,6 +8,12 @@
 
  public class InMemoryGamerRepository : InMemoryRepository<Gamer>, IGamerRepository
  {
+     public Task<bool> ExistsAsync(GamerId id)
+     {
+         var exists = Items.Any(x => x.Id == id);
+         return Task.FromResult(exists);
+     }
+
      public Task<bool> ExistsByEmailAsync(string email)
      {
          var expectedEmail = new Email(email);
@@ -36,9 +42,14 @@
          return Task.CompletedTask;
      }
 
-     public Task<Gamer> LoadAsync(GamerId gamerId)
+     public Task<Gamer?> LoadAsync(GamerId gamerId)
      {
-         var gamer = Items.Single(x => x.Id == gamerId);
+         var gamer = Items.SingleOrDefault(x => x.Id == gamerId);
          return Task.FromResult(gamer);
+     }
+
+     public Task SaveChangesAsync()
+     {
+         return Task.CompletedTask;
      }
  }

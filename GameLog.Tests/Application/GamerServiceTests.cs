@@ -11,6 +11,8 @@ using GameLog.Tests.Mocks;
 using GameLog.Tests.Utils.Repositories;
 using Xunit;
 
+using Commands = GameLog.Application.Gamers.Commands;
+
 namespace GameLog.Tests.Application;
 
 public class GamerServiceTests
@@ -214,5 +216,5 @@ public class GamerServiceTests
             new Nickname("someNickname"),
             MockTimeService.DefaultNonEmptyUtcNow);
 
-    private GamerService GetSut() => new(_gamerRepository, _timeService);
+    private GamerService GetSut() => new(_gamerRepository, _playedGameRepository, _timeService);
 }

@@ -7,6 +7,20 @@ namespace GameLog.Tests.Utils.Repositories;
 
 public class InMemoryGameProfileRepository: InMemoryRepository<GameProfile>, IGameProfileRepository
 {
+    public Task<bool> ExistsAsync(GameProfileId id)
+    {
+        var exists = Items.Any(x => x.Id == id);
+        return Task.FromResult(exists);
+    }
+
+    public Task<bool> NameExistsAsync(string gameProfileName)
+    {
+        var expectedGameName = new GameName(gameProfileName);
+        var exists = Items.Any(x => x.Name == expectedGameName);
+        
+        return Task.FromResult(exists);
+    }
+    
     public Task<GameProfileId> GetIdAsync()
     {
         var id = new GameProfileId(GetNextId());
@@ -19,22 +33,14 @@ public class InMemoryGameProfileRepository: InMemoryRepository<GameProfile>, IGa
         return Task.CompletedTask;
     }
 
-    public Task<GameProfile> LoadAsync(GameProfileId id)
+    public Task<GameProfile?> LoadAsync(GameProfileId id)
     {
-        var item = Items.Single(x => x.Id == id);
+        var item = Items.SingleOrDefault(x => x.Id == id);
         return Task.FromResult(item);
     }
 
-    public Task SaveAsync(GameProfile gameProfile)
+    public Task SaveChangesAsync()
     {
         return Task.CompletedTask;
-    }
-
-    public Task<bool> NameExistsAsync(string gameProfileName)
-    {
-        var expectedGameName = new GameName(gameProfileName);
-        var exists = Items.Any(x => x.Name == expectedGameName);
-        
-        return Task.FromResult(exists);
     }
 }

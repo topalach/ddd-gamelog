@@ -1,14 +1,10 @@
-﻿using GameLog.Domain.GameProfiles;
+﻿using GameLog.Application.Utils;
+using GameLog.Domain.GameProfiles;
 
 namespace GameLog.Application.GameProfiles;
 
-public interface IGameProfileRepository
+public interface IGameProfileRepository : IRepository<GameProfileId, GameProfile>
 {
     Task<bool> ExistsAsync(GameProfileId id);
     Task<bool> NameExistsAsync(string gameProfileName);
-    
-    Task<GameProfileId> GetIdAsync();
-    Task StoreAsync(GameProfile gameProfile);
-    Task<GameProfile?> LoadAsync(GameProfileId id);
-    Task SaveChangesAsync();
 }

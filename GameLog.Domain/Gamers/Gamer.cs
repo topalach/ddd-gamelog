@@ -90,6 +90,8 @@ public class Gamer : Aggregate<Events.GamerEvent>
             _ when numberOfPlayedGames < 20 => GamerRank.Regular,
             _ => GamerRank.Hardcore
         };
+    
+    //TODO: override GetStateValidationErrors to ensure the aggregate is valid
 }
 
 public record GamerId : Id

@@ -60,6 +60,8 @@ public class GameProfile : Aggregate<Events.GameProfileEvent>
                 throw new UnrecognizedEventException(@event);
         }
     }
+    
+    //TODO: override GetStateValidationErrors to ensure the aggregate is valid
 }
 
 public record GameProfileId : Id

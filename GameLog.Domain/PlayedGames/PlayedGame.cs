@@ -1,4 +1,5 @@
-﻿using GameLog.Domain.Common;
+﻿using GameLog.Common.PlayedGames;
+using GameLog.Domain.Common;
 using GameLog.Domain.Common.Exceptions;
 using GameLog.Domain.GameProfiles;
 using GameLog.Domain.Gamers;
@@ -83,6 +84,8 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
                 throw new UnrecognizedEventException(@event);
         }
     }
+
+    //TODO: override GetStateValidationErrors to ensure the aggregate is valid
 }
 
 public record PlayedGameId : Id
@@ -122,10 +125,4 @@ public record NumberOfHoursPlayed
     }
     
     public static NumberOfHoursPlayed Zero => new(0);
-}
-
-public enum PlayedGameStatus
-{
-    CurrentlyPlaying,
-    Played
 }

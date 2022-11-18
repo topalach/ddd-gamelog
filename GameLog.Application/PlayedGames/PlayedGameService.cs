@@ -35,6 +35,7 @@ public class PlayedGameService
 
         await EnsureGamerExists(gamerId);
         await EnsureGameProfileExists(gameProfileId);
+        await EnsureGamerHasNotAddedThisPlayedGameYet(gamerId, gameProfileId);
 
         var id = await _playedGameRepository.GetIdAsync();
         var createdAt = _timeService.UtcNow();
@@ -50,13 +51,23 @@ public class PlayedGameService
         return id.Value;
     }
 
+    private async Task EnsureGamerHasNotAddedThisPlayedGameYet(GamerId gamerId, GameProfileId gameProfileId)
+    {
+        var exists = await _playedGameRepository.ExistsForGamerAndGameProfile(gamerId, gameProfileId);
+
+        if (exists)
+        {
+            throw new InvalidOperationException(
+                $"There is already a played game for gamer {gamerId.Value} and game profile {gameProfileId.Value}.");
+        }
+    }
+
     public async Task UpdateHoursPlayed(Commands.UpdateHoursPlayed command)
     {
         var playedGame = await LoadPlayedGame(command.PlayedGameId);
 
         playedGame.UpdateHoursPlayed(new NumberOfHoursPlayed(command.HoursPlayed));
 
-        //TODO: assert changes saved
         await _playedGameRepository.SaveChangesAsync();
     }
 
@@ -66,7 +77,6 @@ public class PlayedGameService
         
         playedGame.UpdateScore(GameScore.From0To100(command.PercentageScore));
 
-        //TODO: assert changes saved
         await _playedGameRepository.SaveChangesAsync();
     }
 

@@ -1,6 +1,7 @@
 ﻿ using System.Linq;
  using System.Threading.Tasks;
  using GameLog.Application.PlayedGames;
+ using GameLog.Domain.GameProfiles;
  using GameLog.Domain.Gamers;
  using GameLog.Domain.PlayedGames;
 
@@ -18,5 +19,11 @@
      {
          var count = Items.Count(x => x.OwnerGamerId == gamerId);
          return Task.FromResult(new NumberOfPlayedGames(count));
+     }
+
+     public Task<bool> ExistsForGamerAndGameProfile(GamerId gamerId, GameProfileId gameProfileId)
+     {
+         var exists = Items.Any(x => x.OwnerGamerId == gamerId && x.GameProfileId == gameProfileId);
+         return Task.FromResult(exists);
      }
  }

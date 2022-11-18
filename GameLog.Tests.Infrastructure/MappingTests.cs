@@ -1,7 +1,6 @@
 using AutoMapper;
 using GameLog.Common.Gamers;
 using GameLog.Common.PlayedGames;
-using GameLog.Domain.Librarians;
 using GameLog.Infrastructure.Database.Mappings;
 using GameLog.Tests.Common;
 using Xunit;
@@ -197,7 +196,7 @@ public class MappingTests
             CreatedAt = TestData.SomeDateTimeOffset
         };
 
-        var result = Act<Librarian>(entity);
+        var result = Act<Domain.Librarians.Librarian>(entity);
         
         Assert.NotNull(result);
         
@@ -215,9 +214,25 @@ public class MappingTests
     [Fact]
     public void MapsLibrarian_Domain_To_Db()
     {
-        throw new System.NotImplementedException("TODO");
+        var librarian = Domain.Librarians.Librarian.Create(
+            new Domain.Librarians.LibrarianId("709d096f-e112-40ec-937b-386002a2dbfc"),
+            new Domain.Common.Email("librarian@example.com"),
+            new Domain.Common.Nickname("libNick"),
+            new Domain.Common.FullName("John", "Doe"),
+            TestData.SomeDomainTime);
 
-        // var librarian = Librarian.Create()
+        var result = Act<Entities.Librarian>(librarian);
+        
+        Assert.NotNull(result);
+        
+        Assert.Equal(librarian.Id.Value, result.Id);
+        Assert.Equal(librarian.Email.Value, result.Email);
+        Assert.Equal(librarian.Nickname.Value, result.Nickname);
+        
+        Assert.Equal(librarian.FullName.FirstName, result.FirstName);
+        Assert.Equal(librarian.FullName.LastName, result.LastName);
+        
+        Assert.Equal(librarian.CreatedAt.Value, result.CreatedAt);
     }
 
     private TDestination Act<TDestination>(object source)

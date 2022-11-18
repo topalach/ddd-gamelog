@@ -11,6 +11,7 @@ public static class GameLogDbMappingFactory
             {
                 cfg.ConfigureCommonMappings();
                 cfg.ConfigureGamerMappings();
+                cfg.ConfigureLibrarianMappings();
                 cfg.ConfigureGameProfileMappings();
                 cfg.ConfigurePlayedGameMappings();
             });

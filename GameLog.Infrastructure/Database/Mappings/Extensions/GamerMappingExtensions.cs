@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GameLog.Domain.Common;
 using GameLog.Domain.Gamers;
 
 namespace GameLog.Infrastructure.Database.Mappings.Extensions;
@@ -10,7 +11,7 @@ public static class GamerMappingExtensions
         cfg.CreateMap<Entities.Gamer, Gamer>()
             .ForMember(
                 dest => dest.FullName,
-                opt => opt.MapFrom(src => new Domain.Common.FullName(src.FirstName, src.LastName)))
+                opt => opt.MapFrom(src => new FullName(src.FirstName, src.LastName)))
             .ReverseMap()
             .ForPath(x => x.FirstName, opt => opt.MapFrom(src => src.FullName.FirstName))
             .ForPath(x => x.LastName, opt => opt.MapFrom(src => src.FullName.LastName));

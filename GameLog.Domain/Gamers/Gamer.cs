@@ -34,7 +34,7 @@ public class Gamer : Aggregate<Events.GamerEvent>
             Id = id,
             Email = email,
             Nickname = nickname,
-            CreatedAt = createdAt
+            When = createdAt
         });
 
         return gamer;
@@ -64,7 +64,7 @@ public class Gamer : Aggregate<Events.GamerEvent>
                 Id = e.Id;
                 Email = e.Email;
                 Nickname = e.Nickname;
-                CreatedAt = e.CreatedAt;
+                CreatedAt = e.When;
                 NumberOfPlayedGames = NumberOfPlayedGames.Zero;
                 break;
             

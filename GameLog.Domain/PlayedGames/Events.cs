@@ -20,7 +20,7 @@ public static class Events
         public GamerId OwnerGamerId { get; set; }
         public GameProfileId GameProfileId { get; set; }
 
-        public NonEmptyDateTime CreatedAt { get; set; }
+        public NonEmptyDateTime PlayedGameCreatedAt { get; set; }
     }
 
     public class ScoreUpdated : PlayedGameEvent

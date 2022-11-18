@@ -5,11 +5,11 @@ namespace GameLog.Domain.Librarians;
 
 public class Librarian : Aggregate<Events.LibrarianEvent>
 {
-    public LibrarianId Id { get; }
-    public Email Email { get; }
-    public Nickname Nickname { get; }
-    public FullName? FullName { get; }
-    public NonEmptyDateTime CreatedAt { get; }
+    public LibrarianId Id { get; private set; }
+    public Email Email { get; private set; }
+    public Nickname Nickname { get; private set; }
+    public FullName FullName { get; private set; }
+    public NonEmptyDateTime CreatedAt { get; private set; }
 
 #pragma warning disable CS8618
     private Librarian()
@@ -25,33 +25,42 @@ public class Librarian : Aggregate<Events.LibrarianEvent>
         NonEmptyDateTime createdAt)
     {
         var librarian = new Librarian();
-        
-        librarian.Apply(new Events.LibrarianCreated
-        {
-            Id = id,
-            Email = email,
-            Nickname = nickname,
-            FullName = fullName,
-            CreatedAt = createdAt
-        });
+
+        librarian.Apply(
+            new Events.LibrarianCreated
+            {
+                Id = id,
+                Email = email,
+                Nickname = nickname,
+                FullName = fullName,
+                LibrarianCreatedAt = createdAt
+            });
 
         return librarian;
+    }
+    
+    public void UpdateFullName(FullName fullName)
+    {
+        Apply(new Events.FullNameUpdated
+        {
+            FullName = fullName
+        });
     }
 
     protected override void When(Events.LibrarianEvent @event)
     {
-        //TODO: add aggregate tests
-        //TODO: add domain service + tests
-        //TODO: add UpdateFullName
-        
         switch (@event)
         {
-            case Events.LibrarianEvent e:
+            case Events.LibrarianCreated e:
                 Id = e.Id;
                 Email = e.Email;
                 Nickname = e.Nickname;
                 FullName = e.FullName;
-                CreatedAt = e.CreatedAt;
+                CreatedAt = e.LibrarianCreatedAt;
+                break;
+            
+            case Events.FullNameUpdated e:
+                FullName = e.FullName;
                 break;
             
             default:

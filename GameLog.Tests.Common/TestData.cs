@@ -1,7 +1,6 @@
-﻿using System;
-using GameLog.Domain.Common;
+﻿using GameLog.Domain.Common;
 
-namespace GameLog.Tests.Infrastructure;
+namespace GameLog.Tests.Common;
 
 public static class TestData
 {

@@ -8,28 +8,6 @@
 
  public class InMemoryGamerRepository : InMemoryRepository<Gamer>, IGamerRepository
  {
-     public Task<bool> ExistsAsync(GamerId id)
-     {
-         var exists = Items.Any(x => x.Id == id);
-         return Task.FromResult(exists);
-     }
-
-     public Task<bool> ExistsByEmailAsync(string email)
-     {
-         var expectedEmail = new Email(email);
-         var exists = Items.Any(x => x.Email == expectedEmail);
-         
-         return Task.FromResult(exists);
-     }
-
-     public Task<bool> ExistsByNicknameAsync(string nickname)
-     {
-         var expectedNickname = new Nickname(nickname);
-         var exists = Items.Any(x => x.Nickname == expectedNickname);
-         
-         return Task.FromResult(exists);
-     }
-
      public Task<GamerId> GetIdAsync()
      {
          var gamerId = new GamerId(GetNextId());
@@ -51,5 +29,23 @@
      public Task SaveChangesAsync()
      {
          return Task.CompletedTask;
+     }
+     
+     public Task<bool> ExistsAsync(GamerId id)
+     {
+         var exists = Items.Any(x => x.Id == id);
+         return Task.FromResult(exists);
+     }
+
+     public Task<bool> ExistsByEmailAsync(Email email)
+     {
+         var exists = Items.Any(x => x.Email == email);
+         return Task.FromResult(exists);
+     }
+
+     public Task<bool> ExistsByNicknameAsync(Nickname nickname)
+     {
+         var exists = Items.Any(x => x.Nickname == nickname);
+         return Task.FromResult(exists);
      }
  }

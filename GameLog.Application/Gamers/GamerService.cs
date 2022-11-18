@@ -24,15 +24,17 @@ public class GamerService
 
     public async Task<string> CreateGamer(Commands.AddGamer command)
     {
-        var emailTaken = await _gamerRepository.ExistsByEmailAsync(command.Email);
+        var emailTaken = await _gamerRepository.ExistsByEmailAsync(new Email(command.Email));
 
         if (emailTaken)
             throw new InvalidOperationException($"Gamer with email '{command.Email}' was already added.");
 
-        var nicknameTaken = await _gamerRepository.ExistsByNicknameAsync(command.Nickname);
+        var nicknameTaken = await _gamerRepository.ExistsByNicknameAsync(new Nickname(command.Nickname));
         
         if (nicknameTaken)
             throw new InvalidOperationException($"Gamer with nickname '{command.Nickname}' was already added.");
+        
+        //TODO: check librarian nicknames and emails as well
 
         var id = await _gamerRepository.GetIdAsync();
         var createdAt = new NonEmptyDateTime(_timeService.UtcNow());
@@ -53,6 +55,8 @@ public class GamerService
 
         var fullName = new FullName(command.FirstName, command.LastName);
         gamer.UpdateFullName(fullName);
+        
+        //TODO: bug: no SaveChangesAsync()!!!
     }
 
     private async Task<Gamer> LoadGamer(string id)

@@ -1,12 +1,11 @@
 ﻿using GameLog.Application.Utils;
 using GameLog.Domain.Common;
-using GameLog.Domain.Gamers;
+using GameLog.Domain.Librarians;
 
-namespace GameLog.Application.Gamers;
+namespace GameLog.Application.Librarians;
 
-public interface IGamerRepository : IRepository<GamerId, Gamer>
+public interface ILibrarianRepository : IRepository<LibrarianId, Librarian>
 {
-    Task<bool> ExistsAsync(GamerId id);
     Task<bool> ExistsByEmailAsync(Email email);
     Task<bool> ExistsByNicknameAsync(Nickname nickname);
 }

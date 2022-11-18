@@ -38,7 +38,7 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
             Id = id,
             OwnerGamerId = ownerGamerId,
             GameProfileId = gameProfileId,
-            CreatedAt = createdAt
+            PlayedGameCreatedAt = createdAt
         });
 
         return playedGame;
@@ -68,7 +68,7 @@ public class PlayedGame : Aggregate<Events.PlayedGameEvent>
                 Id = e.Id;
                 OwnerGamerId = e.OwnerGamerId;
                 GameProfileId = e.GameProfileId;
-                CreatedAt = e.CreatedAt;
+                CreatedAt = e.PlayedGameCreatedAt;
                 HoursPlayed = NumberOfHoursPlayed.Zero;
                 break;
             

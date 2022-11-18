@@ -1,4 +1,5 @@
 ﻿using GameLog.Domain.Common;
+#pragma warning disable CS8618
 
 namespace GameLog.Domain.GameProfiles;
 

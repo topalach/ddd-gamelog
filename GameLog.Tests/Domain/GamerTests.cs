@@ -8,11 +8,6 @@
 
  public class GamerTests
  {
-     private static GamerId SomeGamerId => new("a98ccefe-40ff-4384-8b12-2130dfb5f03e");
-     private static Email SomeEmail => new("email@example.com");
-     private static Nickname SomeNickname => new("someNickname");
-     private static NonEmptyDateTime SomeCreatedAtDate => new(new DateTimeOffset(2022, 1, 14, 0, 0, 0, TimeSpan.Zero));
-
      [Fact]
      public void SetsRequiredFields_OnCreate()
      {
@@ -64,6 +59,11 @@
          
          Assert.Equal(new FullName("First", "Last"), gamer.FullName);
      }
+     
+     private static GamerId SomeGamerId => new("a98ccefe-40ff-4384-8b12-2130dfb5f03e");
+     private static Email SomeEmail => new("email@example.com");
+     private static Nickname SomeNickname => new("someNickname");
+     private static NonEmptyDateTime SomeCreatedAtDate => new(new DateTimeOffset(2022, 1, 14, 0, 0, 0, TimeSpan.Zero));
 
      private static Gamer CreateSomeGamer() => Gamer.Create(
          SomeGamerId,

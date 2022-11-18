@@ -3,6 +3,7 @@ using GameLog.Common.Gamers;
 using GameLog.Common.PlayedGames;
 using GameLog.Domain.Librarians;
 using GameLog.Infrastructure.Database.Mappings;
+using GameLog.Tests.Common;
 using Xunit;
 
 using Entities = GameLog.Infrastructure.Database.Entities;
@@ -214,7 +215,9 @@ public class MappingTests
     [Fact]
     public void MapsLibrarian_Domain_To_Db()
     {
-        var librarian = Librarian.Create()
+        throw new System.NotImplementedException("TODO");
+
+        // var librarian = Librarian.Create()
     }
 
     private TDestination Act<TDestination>(object source)

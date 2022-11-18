@@ -172,6 +172,8 @@ public class PlayedGameServiceTests
         
         Assert.NotNull(playedGame);
         Assert.Equal(hoursPlayed, playedGame.HoursPlayed.Value);
+
+        AssertSavedChanges();
     }
 
     [Fact]
@@ -188,6 +190,8 @@ public class PlayedGameServiceTests
         var sut = GetSut();
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdateHoursPlayed(command));
+
+        AssertDidNotSaveChanges();
     }
 
     [Fact]
@@ -212,12 +216,13 @@ public class PlayedGameServiceTests
         Assert.NotNull(playedGame.Score);
         
         Assert.Equal(percentageScore, playedGame.Score.Percentage);
+
+        AssertSavedChanges();
     }
 
     [Fact]
     public async Task UpdatePercentageScore_Fails_WhenPlayedGameDoesNotExist()
     {
-        const string playedGameId = "played-game-does-not-exist";
         const int someHoursPlayed = 3;
 
         var command = new Commands.UpdatePercentageScore
@@ -229,6 +234,8 @@ public class PlayedGameServiceTests
         var sut = GetSut();
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdatePercentageScore(command));
+
+        AssertDidNotSaveChanges();
     }
 
     private async Task<GamerId> CreateSomeGamer()
@@ -293,5 +300,15 @@ public class PlayedGameServiceTests
         
         Assert.NotNull(playedGame);
         return playedGame;
+    }
+
+    private void AssertSavedChanges()
+    {
+        throw new NotImplementedException("TODO");
+    }
+    
+    private void AssertDidNotSaveChanges()
+    {
+        throw new NotImplementedException("TODO");
     }
 }

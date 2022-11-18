@@ -26,14 +26,14 @@
          return Task.FromResult(playedGame);
      }
 
+     public Task SaveChangesAsync()
+     {
+         return Task.CompletedTask;
+     }
+
      public Task<NumberOfPlayedGames> GetNumberOfPlayedGamesFor(GamerId gamerId)
      {
          var count = Items.Count(x => x.OwnerGamerId == gamerId);
          return Task.FromResult(new NumberOfPlayedGames(count));
-     }
-
-     public Task SaveChangesAsync()
-     {
-         return Task.CompletedTask;
      }
  }

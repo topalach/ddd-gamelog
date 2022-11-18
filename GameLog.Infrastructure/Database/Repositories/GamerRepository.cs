@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameLog.Application.Gamers;
+using GameLog.Domain.Common;
 using GameLog.Domain.Gamers;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,16 @@ public class GamerRepository : EntityFrameworkRepository, IGamerRepository
     }
     
     public Task<bool> ExistsAsync(GamerId id) => DbContext.Gamers.AnyAsync(x => x.Id == id.Value);
-    public Task<bool> ExistsByEmailAsync(string email) => DbContext.Gamers.AnyAsync(x => x.Email == email);
-    public Task<bool> ExistsByNicknameAsync(string nickname) => DbContext.Gamers.AnyAsync(x => x.Nickname == nickname);
+    
+    public Task<bool> ExistsByEmailAsync(Email email)
+    {
+        var expectedEmail = email.Value;
+        return DbContext.Gamers.AnyAsync(x => x.Email == expectedEmail);
+    }
+
+    public Task<bool> ExistsByNicknameAsync(Nickname nickname)
+    {
+        var expectedNickname = nickname.Value;
+        return DbContext.Gamers.AnyAsync(x => x.Nickname == expectedNickname);
+    }
 }

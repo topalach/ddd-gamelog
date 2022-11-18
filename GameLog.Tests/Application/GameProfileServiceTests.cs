@@ -32,7 +32,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenGameProfile_WithTheSameName_AlreadyAdded()
+    public async Task AddingFails_WhenGameProfile_WithTheSameName_AlreadyAdded()
     {
         const string name = "Game profile name";
 
@@ -62,7 +62,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenNameIsNull()
+    public async Task AddingFails_WhenNameIsNull()
     {
         var command = CorrectAddGameProfileCommand;
         command.Name = null;
@@ -73,7 +73,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenDescriptionIsNull()
+    public async Task AddingFails_WhenDescriptionIsNull()
     {
         var command = CorrectAddGameProfileCommand;
         command.Description = null;
@@ -84,7 +84,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenGenreIsNull()
+    public async Task AddingFails_WhenGenreIsNull()
     {
         var command = CorrectAddGameProfileCommand;
         command.Genre = null;
@@ -95,7 +95,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenDeveloperIsNull()
+    public async Task AddingFails_WhenDeveloperIsNull()
     {
         var command = CorrectAddGameProfileCommand;
         command.Developer = null;
@@ -106,7 +106,7 @@ public class GameProfileServiceTests
     }
 
     [Fact]
-    public async Task Fails_WhenPublisherIsNull()
+    public async Task AddingFails_WhenPublisherIsNull()
     {
         var command = CorrectAddGameProfileCommand;
         command.Publisher = null;

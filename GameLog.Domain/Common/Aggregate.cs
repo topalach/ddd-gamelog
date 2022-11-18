@@ -2,7 +2,14 @@
 
 namespace GameLog.Domain.Common;
 
-public abstract class Aggregate<TEvent> where TEvent : Event
+public abstract class Aggregate<TId> where TId : Id
+{
+    public TId Id { get; protected set; }
+}
+
+public abstract class Aggregate<TId, TEvent> : Aggregate<TId>
+    where TId : Id
+    where TEvent : Event
 {
     private readonly List<TEvent> _changes = new();
 

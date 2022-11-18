@@ -5,29 +5,12 @@ using GameLog.Domain.GameProfiles;
 
 namespace GameLog.Tests.Utils.Repositories;
 
-public class InMemoryGameProfileRepository: InMemoryRepository<GameProfile>, IGameProfileRepository
+public class InMemoryGameProfileRepository: InMemoryRepository<GameProfileId, GameProfile>, IGameProfileRepository
 {
     public Task<GameProfileId> GetIdAsync()
     {
         var id = new GameProfileId(GetNextId());
         return Task.FromResult(id);
-    }
-
-    public Task StoreAsync(GameProfile gameProfile)
-    {
-        Items.Add(gameProfile);
-        return Task.CompletedTask;
-    }
-
-    public Task<GameProfile?> LoadAsync(GameProfileId id)
-    {
-        var item = Items.SingleOrDefault(x => x.Id == id);
-        return Task.FromResult(item);
-    }
-
-    public Task SaveChangesAsync()
-    {
-        return Task.CompletedTask;
     }
     
     public Task<bool> ExistsAsync(GameProfileId id)

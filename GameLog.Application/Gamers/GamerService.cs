@@ -55,8 +55,8 @@ public class GamerService
 
         var fullName = new FullName(command.FirstName, command.LastName);
         gamer.UpdateFullName(fullName);
-        
-        //TODO: bug: no SaveChangesAsync()!!!
+
+        await _gamerRepository.SaveChangesAsync();
     }
 
     private async Task<Gamer> LoadGamer(string id)
@@ -75,5 +75,7 @@ public class GamerService
 
         var numberOfPlayedGames = await _playedGameRepository.GetNumberOfPlayedGamesFor(new GamerId(command.GamerId));
         gamer.UpdateNumberOfPlayedGames(numberOfPlayedGames);
+
+        await _gamerRepository.SaveChangesAsync();
     }
 }

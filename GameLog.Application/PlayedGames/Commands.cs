@@ -1,4 +1,5 @@
-﻿namespace GameLog.Application.PlayedGames;
+﻿#pragma warning disable CS8618
+namespace GameLog.Application.PlayedGames;
 
 public static class Commands
 {

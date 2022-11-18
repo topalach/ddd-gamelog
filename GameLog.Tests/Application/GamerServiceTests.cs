@@ -17,7 +17,7 @@ namespace GameLog.Tests.Application;
 
 public class GamerServiceTests
 {
-    private readonly IGamerRepository _gamerRepository = new InMemoryGamerRepository();
+    private readonly InMemoryGamerRepository _gamerRepository = new();
     private readonly IPlayedGameRepository _playedGameRepository = new InMemoryPlayedGameRepository();
     
     private readonly ITimeService _timeService = new MockTimeService();
@@ -117,7 +117,7 @@ public class GamerServiceTests
         
         Assert.Equal(new FullName("first", "last"), gamer.FullName);
         
-        AssertSavedChanges();
+        AssertSavedChanges(gamer.Id);
     }
 
     [Fact]
@@ -134,7 +134,7 @@ public class GamerServiceTests
         
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdateFullName(command));
         
-        AssertDidNotSaveChanges();
+        AssertEmptyRepository();
     }
 
     [Fact]
@@ -156,7 +156,7 @@ public class GamerServiceTests
         
         Assert.Equal(new NumberOfPlayedGames(3), gamer.NumberOfPlayedGames);
         
-        AssertSavedChanges();
+        AssertSavedChanges(gamer.Id);
     }
 
     private Task StoreSomePlayedGame(GamerId gamerId, int ordinal)
@@ -188,7 +188,7 @@ public class GamerServiceTests
         
         Assert.Equal(NumberOfPlayedGames.Zero, gamer.NumberOfPlayedGames);
         
-        AssertSavedChanges();
+        AssertDidNotSaveChanges(gamer.Id);
     }
 
     [Fact]
@@ -206,7 +206,7 @@ public class GamerServiceTests
         
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdateNumberOfPlayedGames(command));
 
-        AssertDidNotSaveChanges();
+        AssertDidNotSaveChanges(gamer.Id);
     }
 
     private static readonly GamerId DefaultGamerId = new("88443a04-47f1-49b3-b94e-b7a6df2d3dc2");
@@ -228,13 +228,8 @@ public class GamerServiceTests
 
     private GamerService GetSut() => new(_gamerRepository, _playedGameRepository, _timeService);
 
-    private void AssertSavedChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
+    private void AssertSavedChanges(GamerId id) => _gamerRepository.AssertChangesApplied(id);
+    private void AssertDidNotSaveChanges(GamerId id) => _gamerRepository.AssertNoChangesApplied(id);
 
-    private void AssertDidNotSaveChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
+    private void AssertEmptyRepository() => _gamerRepository.AssertEmpty();
 }

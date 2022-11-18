@@ -6,9 +6,8 @@ using GameLog.Domain.Gamers;
 
 namespace GameLog.Domain.PlayedGames;
 
-public class PlayedGame : Aggregate<Events.PlayedGameEvent>
+public class PlayedGame : Aggregate<PlayedGameId, Events.PlayedGameEvent>
 {
-    public PlayedGameId Id { get; private set; }
     public GamerId OwnerGamerId { get; private set; }
     public GameProfileId GameProfileId { get; private set; }
     

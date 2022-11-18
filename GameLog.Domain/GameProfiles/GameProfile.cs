@@ -4,9 +4,8 @@ using GameLog.Domain.Common.Exceptions;
 
 namespace GameLog.Domain.GameProfiles;
 
-public class GameProfile : Aggregate<Events.GameProfileEvent>
+public class GameProfile : Aggregate<GameProfileId, Events.GameProfileEvent>
 {
-    public GameProfileId Id { get; private set; }
     public GameName Name { get; private set; }
     public Genre Genre { get; private set; }
     public DevelopmentInfo DevelopmentInfo { get; private set; }

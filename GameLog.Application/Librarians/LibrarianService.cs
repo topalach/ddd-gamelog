@@ -49,8 +49,8 @@ public class LibrarianService
         
         var fullName = new FullName(command.FirstName, command.LastName);
         librarian.UpdateFullName(fullName);
-        
-        //TODO: bug: no SaveChangesAsync()!!!
+
+        await _librarianRepository.SaveChangesAsync();
     }
 
     private async Task<Librarian> LoadLibrarian(string id)

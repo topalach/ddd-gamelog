@@ -17,8 +17,9 @@ namespace GameLog.Tests.Application;
 
 public class PlayedGameServiceTests
 {
+    private readonly InMemoryPlayedGameRepository _playedGameRepository = new();
+    
     private readonly IGamerRepository _gamerRepository = new InMemoryGamerRepository();
-    private readonly IPlayedGameRepository _playedGameRepository = new InMemoryPlayedGameRepository();
     private readonly IGameProfileRepository _gameProfileRepository = new InMemoryGameProfileRepository();
     
     private readonly ITimeService _timeService = new MockTimeService();
@@ -173,7 +174,7 @@ public class PlayedGameServiceTests
         Assert.NotNull(playedGame);
         Assert.Equal(hoursPlayed, playedGame.HoursPlayed.Value);
 
-        AssertSavedChanges();
+        AssertSavedChanges(playedGameId);
     }
 
     [Fact]
@@ -191,7 +192,7 @@ public class PlayedGameServiceTests
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdateHoursPlayed(command));
 
-        AssertDidNotSaveChanges();
+        AssertEmptyRepository();
     }
 
     [Fact]
@@ -217,7 +218,7 @@ public class PlayedGameServiceTests
         
         Assert.Equal(percentageScore, playedGame.Score.Percentage);
 
-        AssertSavedChanges();
+        AssertSavedChanges(playedGameId);
     }
 
     [Fact]
@@ -235,7 +236,7 @@ public class PlayedGameServiceTests
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdatePercentageScore(command));
 
-        AssertDidNotSaveChanges();
+        AssertEmptyRepository();
     }
 
     private async Task<GamerId> CreateSomeGamer()
@@ -302,13 +303,7 @@ public class PlayedGameServiceTests
         return playedGame;
     }
 
-    private void AssertSavedChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
-    
-    private void AssertDidNotSaveChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
+    private void AssertSavedChanges(PlayedGameId id) => _playedGameRepository.AssertChangesApplied(id);
+
+    private void AssertEmptyRepository() => _playedGameRepository.AssertEmpty();
 }

@@ -4,9 +4,8 @@ using GameLog.Domain.Common.Exceptions;
 
 namespace GameLog.Domain.Gamers;
 
-public class Gamer : Aggregate<Events.GamerEvent>
+public class Gamer : Aggregate<GamerId, Events.GamerEvent>
 {
-    public GamerId Id { get; private set; }
     public Email Email { get; private set; }
     public Nickname Nickname { get; private set; }
     public FullName? FullName { get; private set; }

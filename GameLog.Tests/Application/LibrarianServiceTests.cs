@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GameLog.Application.Librarians;
 using GameLog.Application.Utils;
 using GameLog.Domain.Common;
+using GameLog.Domain.Common.Exceptions;
 using GameLog.Domain.Librarians;
 using GameLog.Tests.Common;
 using GameLog.Tests.Mocks;
@@ -13,7 +14,7 @@ namespace GameLog.Tests.Application;
 
 public class LibrarianServiceTests
 {
-    private readonly ILibrarianRepository _librarianRepository = new InMemoryLibrarianRepository();
+    private readonly InMemoryLibrarianRepository _librarianRepository = new();
     private readonly ITimeService _timeService = new MockTimeService();
     
     [Fact]
@@ -82,7 +83,7 @@ public class LibrarianServiceTests
 
         var sut = GetSut();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => sut.AddLibrarian(command));
+        await Assert.ThrowsAsync<InvalidParameterException>(() => sut.AddLibrarian(command));
     }
 
     [Fact]
@@ -92,7 +93,7 @@ public class LibrarianServiceTests
 
         var sut = GetSut();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => sut.AddLibrarian(command));
+        await Assert.ThrowsAsync<InvalidParameterException>(() => sut.AddLibrarian(command));
     }
 
     [Fact]
@@ -103,7 +104,7 @@ public class LibrarianServiceTests
 
         var sut = GetSut();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => sut.AddLibrarian(command));
+        await Assert.ThrowsAsync<InvalidParameterException>(() => sut.AddLibrarian(command));
     }
 
     [Fact]
@@ -114,7 +115,7 @@ public class LibrarianServiceTests
 
         var sut = GetSut();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => sut.AddLibrarian(command));
+        await Assert.ThrowsAsync<InvalidParameterException>(() => sut.AddLibrarian(command));
     }
 
     [Fact]
@@ -134,7 +135,7 @@ public class LibrarianServiceTests
         
         Assert.Equal(new FullName("John", "Doe"), librarian.FullName);
         
-        AssertSavedChanges();
+        AssertSavedChanges(librarian.Id);
     }
 
     [Fact]
@@ -151,7 +152,7 @@ public class LibrarianServiceTests
         
         await Assert.ThrowsAsync<InvalidOperationException>(() => sut.UpdateFullName(command));
         
-        AssertDidNotSaveChanges();
+        AssertEmptyRepository();
     }
 
     private static Commands.AddLibrarian GetCorrectAddCommand(
@@ -182,13 +183,7 @@ public class LibrarianServiceTests
 
     private LibrarianService GetSut() => new(_librarianRepository, _timeService);
 
-    private void AssertSavedChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
+    private void AssertSavedChanges(LibrarianId id) => _librarianRepository.AssertChangesApplied(id);
 
-    private void AssertDidNotSaveChanges()
-    {
-        throw new NotImplementedException("TODO");
-    }
+    private void AssertEmptyRepository() => _librarianRepository.AssertEmpty();
 }

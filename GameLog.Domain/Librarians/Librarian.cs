@@ -3,9 +3,8 @@ using GameLog.Domain.Common.Exceptions;
 
 namespace GameLog.Domain.Librarians;
 
-public class Librarian : Aggregate<Events.LibrarianEvent>
+public class Librarian : Aggregate<LibrarianId, Events.LibrarianEvent>
 {
-    public LibrarianId Id { get; private set; }
     public Email Email { get; private set; }
     public Nickname Nickname { get; private set; }
     public FullName FullName { get; private set; }

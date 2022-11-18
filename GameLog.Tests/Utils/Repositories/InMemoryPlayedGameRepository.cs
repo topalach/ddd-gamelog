@@ -6,29 +6,12 @@
 
  namespace GameLog.Tests.Utils.Repositories;
 
- public class InMemoryPlayedGameRepository :  InMemoryRepository<PlayedGame>, IPlayedGameRepository
+ public class InMemoryPlayedGameRepository :  InMemoryRepository<PlayedGameId, PlayedGame>, IPlayedGameRepository
  {
      public Task<PlayedGameId> GetIdAsync()
      {
          var id = new PlayedGameId(GetNextId());
          return Task.FromResult(id);
-     }
-
-     public Task StoreAsync(PlayedGame playedGame)
-     {
-         Items.Add(playedGame);
-         return Task.CompletedTask;
-     }
-
-     public Task<PlayedGame?> LoadAsync(PlayedGameId id)
-     {
-         var playedGame = Items.SingleOrDefault(x => x.Id == id);
-         return Task.FromResult(playedGame);
-     }
-
-     public Task SaveChangesAsync()
-     {
-         return Task.CompletedTask;
      }
 
      public Task<NumberOfPlayedGames> GetNumberOfPlayedGamesFor(GamerId gamerId)

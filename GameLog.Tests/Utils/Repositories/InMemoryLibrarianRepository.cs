@@ -6,29 +6,12 @@ using GameLog.Domain.Librarians;
 
 namespace GameLog.Tests.Utils.Repositories;
 
-public class InMemoryLibrarianRepository : InMemoryRepository<Librarian>, ILibrarianRepository
+public class InMemoryLibrarianRepository : InMemoryRepository<LibrarianId, Librarian>, ILibrarianRepository
 {
     public Task<LibrarianId> GetIdAsync()
     {
         var librarianId = new LibrarianId(GetNextId());
         return Task.FromResult(librarianId);
-    }
-
-    public Task StoreAsync(Librarian gameProfile)
-    {
-        Items.Add(gameProfile);
-        return Task.CompletedTask;
-    }
-
-    public Task<Librarian?> LoadAsync(LibrarianId id)
-    {
-        var librarian = Items.SingleOrDefault(x => x.Id == id);
-        return Task.FromResult(librarian);
-    }
-
-    public Task SaveChangesAsync()
-    {
-        return Task.CompletedTask;
     }
 
     public Task<bool> ExistsByEmailAsync(Email email)

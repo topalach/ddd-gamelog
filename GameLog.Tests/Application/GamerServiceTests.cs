@@ -117,7 +117,7 @@ public class GamerServiceTests
         
         Assert.Equal(new FullName("first", "last"), gamer.FullName);
         
-        AssertSavedChanges(gamer.Id);
+        AssertChangesAppliedOnlyTo(gamer.Id);
     }
 
     [Fact]
@@ -156,7 +156,7 @@ public class GamerServiceTests
         
         Assert.Equal(new NumberOfPlayedGames(3), gamer.NumberOfPlayedGames);
         
-        AssertSavedChanges(gamer.Id);
+        AssertChangesAppliedOnlyTo(gamer.Id);
     }
 
     private Task StoreSomePlayedGame(GamerId gamerId, int ordinal)
@@ -228,7 +228,7 @@ public class GamerServiceTests
 
     private GamerService GetSut() => new(_gamerRepository, _playedGameRepository, _timeService);
 
-    private void AssertSavedChanges(GamerId id) => _gamerRepository.AssertChangesApplied(id);
+    private void AssertChangesAppliedOnlyTo(GamerId id) => _gamerRepository.AssertChangesAppliedOnlyTo(id);
     private void AssertDidNotSaveChanges(GamerId id) => _gamerRepository.AssertNoChangesApplied(id);
 
     private void AssertEmptyRepository() => _gamerRepository.AssertEmpty();

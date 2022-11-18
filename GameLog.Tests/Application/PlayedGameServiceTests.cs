@@ -174,7 +174,7 @@ public class PlayedGameServiceTests
         Assert.NotNull(playedGame);
         Assert.Equal(hoursPlayed, playedGame.HoursPlayed.Value);
 
-        AssertSavedChanges(playedGameId);
+        AssertChangesAppliedOnlyTo(playedGameId);
     }
 
     [Fact]
@@ -218,7 +218,7 @@ public class PlayedGameServiceTests
         
         Assert.Equal(percentageScore, playedGame.Score.Percentage);
 
-        AssertSavedChanges(playedGameId);
+        AssertChangesAppliedOnlyTo(playedGameId);
     }
 
     [Fact]
@@ -303,7 +303,7 @@ public class PlayedGameServiceTests
         return playedGame;
     }
 
-    private void AssertSavedChanges(PlayedGameId id) => _playedGameRepository.AssertChangesApplied(id);
+    private void AssertChangesAppliedOnlyTo(PlayedGameId id) => _playedGameRepository.AssertChangesAppliedOnlyTo(id);
 
     private void AssertEmptyRepository() => _playedGameRepository.AssertEmpty();
 }

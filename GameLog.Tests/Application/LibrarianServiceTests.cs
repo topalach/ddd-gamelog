@@ -135,7 +135,7 @@ public class LibrarianServiceTests
         
         Assert.Equal(new FullName("John", "Doe"), librarian.FullName);
         
-        AssertSavedChanges(librarian.Id);
+        AssertChangesAppliedOnlyTo(librarian.Id);
     }
 
     [Fact]
@@ -183,7 +183,7 @@ public class LibrarianServiceTests
 
     private LibrarianService GetSut() => new(_librarianRepository, _timeService);
 
-    private void AssertSavedChanges(LibrarianId id) => _librarianRepository.AssertChangesApplied(id);
+    private void AssertChangesAppliedOnlyTo(LibrarianId id) => _librarianRepository.AssertChangesAppliedOnlyTo(id);
 
     private void AssertEmptyRepository() => _librarianRepository.AssertEmpty();
 }

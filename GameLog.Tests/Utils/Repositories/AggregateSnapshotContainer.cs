@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace GameLog.Tests.Utils.Repositories;
@@ -20,6 +21,8 @@ internal class AggregateSnapshotContainer
         => _snapshotsPerId.ContainsKey(id)
             ? _snapshotsPerId[id].Count
             : 0;
+
+    public IEnumerable<string> GetSnapshotIds() => _snapshotsPerId.Keys.ToList();
 }
 
 internal record AggregateSnapshot

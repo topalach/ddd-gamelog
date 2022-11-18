@@ -40,19 +40,32 @@ public abstract class InMemoryRepository<TId, TAggregate>
 
     private void AddSnapshot(TAggregate aggregate) => _snapshots.Add(aggregate.Id.Value, aggregate);
 
-    public void AssertChangesApplied(TId id)
+    public void AssertNoChangesApplied(TId id) => AssertNoChangesApplied(id.Value);
+
+    private void AssertNoChangesApplied(string id)
+    {
+        var snapshotCount = _snapshots.GetSnapshotCount(id);
+        Assert.Equal(1, snapshotCount);
+    }
+
+    public void AssertChangesAppliedOnlyTo(TId id)
+    {
+        AssertChangesAppliedTo(id);
+
+        var otherSnapshotIds = _snapshots.GetSnapshotIds()
+            .Where(x => x != id.Value)
+            .ToList();
+        
+        Assert.All(otherSnapshotIds, AssertNoChangesApplied);
+    }
+
+    private void AssertChangesAppliedTo(TId id)
     {
         var snapshotCount = _snapshots.GetSnapshotCount(id.Value);
         
         Assert.True(
             snapshotCount > 1,
             $"Expected to have more than 1 snapshot of aggregate ID '{id.Value}' but have {snapshotCount}.");
-    }
-
-    public void AssertNoChangesApplied(TId id)
-    {
-        var snapshotCount = _snapshots.GetSnapshotCount(id.Value);
-        Assert.Equal(1, snapshotCount);
     }
 
     public void AssertEmpty() => Assert.Empty(Items);

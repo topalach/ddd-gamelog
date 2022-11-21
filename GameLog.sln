@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Tests.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Tests.Common", "GameLog.Tests.Common\GameLog.Tests.Common.csproj", "{BEE574E5-822C-4E9F-974A-3B6018820481}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLog.Web", "GameLog.Web\GameLog.Web.csproj", "{3B603213-CD28-410E-9E89-910B5153BA05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{BEE574E5-822C-4E9F-974A-3B6018820481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE574E5-822C-4E9F-974A-3B6018820481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE574E5-822C-4E9F-974A-3B6018820481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B603213-CD28-410E-9E89-910B5153BA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B603213-CD28-410E-9E89-910B5153BA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B603213-CD28-410E-9E89-910B5153BA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B603213-CD28-410E-9E89-910B5153BA05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B94DE3E3-ED96-41DC-8333-5573F28C1C09} = {2B45C342-F514-4678-8DC0-30C710E25681}

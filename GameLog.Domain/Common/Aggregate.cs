@@ -4,7 +4,9 @@ namespace GameLog.Domain.Common;
 
 public abstract class Aggregate<TId> where TId : Id
 {
+#pragma warning disable CS8618
     public TId Id { get; protected set; }
+#pragma warning restore CS8618
 }
 
 public abstract class Aggregate<TId, TEvent> : Aggregate<TId>

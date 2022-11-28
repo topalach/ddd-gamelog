@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using GameLog.Common.Gamers;
 using GameLog.Common.Validation;
 
@@ -18,7 +19,9 @@ public class Gamer : DbEntity
     [MaxLength(ValidationConstants.MaxLength.LastName)]
     public string LastName { get; set; }
     
+    [Column(TypeName = "nvarchar(16)")]
     public GamerRank Rank { get; set; }
+    
     public int NumberOfPlayedGames { get; set; }
     
     public List<PlayedGame> PlayedGames { get; set; }

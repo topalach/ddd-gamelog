@@ -1,6 +1,4 @@
 ﻿using GameLog.Common.PlayedGames;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GameLog.Infrastructure.Database.Entities;
 
@@ -15,12 +13,4 @@ public class PlayedGame : DbEntity
     public PlayedGameStatus? Status { get; set; }
     public int PercentageScore { get; set; }
     public int HoursPlayed { get; set; }
-}
-
-public class PlayedGameEntityTypeConfiguration : IEntityTypeConfiguration<PlayedGame>
-{
-    public void Configure(EntityTypeBuilder<PlayedGame> builder)
-    {
-        builder.ToTable(TableNames.PlayedGames);
-    }
 }

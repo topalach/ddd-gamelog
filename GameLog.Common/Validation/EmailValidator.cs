@@ -8,6 +8,9 @@ public static class EmailValidator
         if (string.IsNullOrEmpty(email))
             return false;
 
+        if (email.Length > ValidationConstants.MaxLength.Email)
+            return false;
+
         return email.Contains('@') && email.Contains('.');
     }
 }

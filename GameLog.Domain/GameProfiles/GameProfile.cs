@@ -72,7 +72,7 @@ public record GameProfileId : Id
 
 public record GameName
 {
-    private const int NameMaxLength = ValidationConstants.GameProfiles.NameMaxLength;
+    private const int NameMaxLength = ValidationConstants.MaxLength.GameProfiles.Name;
     
     public string Value { get; }
 
@@ -94,6 +94,9 @@ public record GameName
 
 public record DevelopmentInfo
 {
+    private const int DeveloperMaxLength = ValidationConstants.MaxLength.GameProfiles.Developer;
+    private const int PublisherMaxLength = ValidationConstants.MaxLength.GameProfiles.Publisher;
+    
     public string Developer { get; }
     public string Publisher { get; }
 
@@ -104,7 +107,21 @@ public record DevelopmentInfo
         
         if (string.IsNullOrEmpty(publisher))
             throw new InvalidParameterException("Publisher name cannot be null nor empty", nameof(publisher));
-        
+
+        if (developer.Length > DeveloperMaxLength)
+        {
+            throw new InvalidParameterException(
+                $"Developer name cannot be longer than {DeveloperMaxLength} characters",
+                nameof(developer));
+        }
+
+        if (publisher.Length > PublisherMaxLength)
+        {
+            throw new InvalidParameterException(
+                $"Publisher name cannot be longer than {PublisherMaxLength} characters",
+                nameof(publisher));
+        }
+
         Developer = developer;
         Publisher = publisher;
     }
@@ -112,20 +129,29 @@ public record DevelopmentInfo
 
 public record Genre
 {
+    private const int MaxLength = ValidationConstants.MaxLength.GameProfiles.Genre;
+    
     public string Value { get; }
 
     public Genre(string value)
     {
         if (string.IsNullOrEmpty(value))
             throw new InvalidParameterException("Genre cannot be null nor empty", nameof(value));
-        
+
+        if (value.Length > MaxLength)
+        {
+            throw new InvalidParameterException(
+                $"Genre name cannot be longer than {MaxLength} characters",
+                nameof(value));
+        }
+
         Value = value;
     }
 }
 
 public record GameProfileDescription
 {
-    private const int MaxLength = ValidationConstants.GameProfiles.DescriptionMaxLength;
+    private const int MaxLength = ValidationConstants.MaxLength.GameProfiles.Description;
     
     public string Value { get; }
 
